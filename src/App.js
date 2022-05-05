@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Footer } from "./components/Footer";
-import { GamePage } from "./components/GamePage";
 import { Header } from "./components/Header";
+import { Page } from "./components/Page";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
   return (
   <>
     <Header handleChange={handleChange} />
-    <GamePage desafio={desafio}/>
+    <Page desafio={desafio}/>
     <Footer />
   </>
   );

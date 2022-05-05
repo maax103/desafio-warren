@@ -19,7 +19,8 @@ export const Desafio01Container = styled.div`
     }
     
     button{
-        margin-top: 2rem;
+        margin: 2rem auto;
+        max-width: 1000px;
         color: #E1E1E6;
         font-size: 2rem;
         border: none;
