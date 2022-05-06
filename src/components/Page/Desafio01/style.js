@@ -44,6 +44,8 @@ export const Desafio01Container = styled.div`
         align-items: center;
         border-radius: 3px;
         text-align: center;
+        max-width: 400px;
+        margin: auto;
         
     }
     .solution{

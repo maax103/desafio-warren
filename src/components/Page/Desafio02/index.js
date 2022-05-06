@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Desafio02Container } from "./style";
 
 export const Desafio02 = () => {
-  const [maxTolerance, setMaxTolerance] = useState(0);
+  const [maxTolerance, setMaxTolerance] = useState(2);
   const [classTime, setClassTime] = useState("18:30");
-  const [students, setStudents] = useState([{ time: '18:20' }]);
+  const [students, setStudents] = useState([{ time: '18:20' }, { time: '18:29' }]);
 
 
   function addStudent() {
@@ -19,7 +19,6 @@ export const Desafio02 = () => {
     setStudents((students) => {
       let newArray = [...students];
       newArray[studentId].time = time;
-      console.log(newArray);
       return newArray;
     });
   }
@@ -40,9 +39,9 @@ export const Desafio02 = () => {
       if (elem.time == 0){counterZeros = counterZeros + 1}
     });
     return students.length - laterCount - counterZeros >= maxTolerance ? (
-      <h3>Aula normal com {students.length - laterCount} aluno(s) </h3>
+      <h3 className="normal">Aula normal com {students.length - laterCount} aluno(s) </h3>
     ) : (
-      <h3>Aula canelada pois só há {students.length - laterCount - counterZeros} aluno(s) presente(s)</h3>
+      <h3 className="canceled">Aula canelada pois há {students.length - laterCount - counterZeros} aluno(s) presente(s)</h3>
     );
   }
 
@@ -54,8 +53,7 @@ export const Desafio02 = () => {
         cancelada ou não ("Aula cancelada” ou “Aula normal”).
       </p>
       <p>
-        Instruções: Digite um número abaixo caso deseje alterar o limitador n e
-        clique em Calcular solução.
+        Instruções: Defina o horário da aula e quantidade mínima de alunos. Então preencha o horário de chegada dos alunos.
       </p>
       <label>Horário da aula</label>
       <input value={classTime}
@@ -66,8 +64,10 @@ export const Desafio02 = () => {
         }}
       />
       <label>Quantidade mínima de alunos</label>
-      <input id="classTime"
+      <input 
+      value={maxTolerance}
         type="number"
+        min="1"
         onChange={(e) => {
           let value = e.target.value >= 0 ? e.target.value : 0;
           console.log(value);
@@ -90,7 +90,7 @@ export const Desafio02 = () => {
         </div>
       ))}
       <div className="buttons">
-        <button onClick={addStudent}>Adicionar outro um aluno</button>
+        <button onClick={addStudent}>Adicionar outro aluno</button>
         <button onClick={dropStudent}>Excluir último aluno</button>
       </div>
       <Solution />

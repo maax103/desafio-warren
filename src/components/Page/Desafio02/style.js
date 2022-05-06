@@ -109,4 +109,14 @@ export const Desafio02Container = styled.div`
       line-height: 2.4rem;
     }
   }
+  h3{
+    margin: auto;
+    margin-top: 2rem;
+  }
+  .normal{
+    color: green;
+  }
+  .canceled{
+    color: #FF2222;
+  }
 `;
