@@ -77,6 +77,14 @@ export const Desafio02Container = styled.div`
       }
     }
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  }
+  input[type=number] {
+  -moz-appearance: textfield;
+  }
 
   .solution {
     border: 1px solid #8257e6;

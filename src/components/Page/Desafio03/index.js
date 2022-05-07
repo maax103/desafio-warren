@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Desafio03Container } from "./style";
 
 export const Desafio03 = () => {
-  const [number, setNumber] = useState(1);
+  const [number, setNumber] = useState(10);
   const [numberArray, setNumberArray] = useState([]);
   const [insertNumber, setInsertNumber] = useState(1);
   const [solutionArray, setSolutionArray] = useState([]);
@@ -21,7 +21,6 @@ export const Desafio03 = () => {
     });
   }
   function handleSetNumber(e) {
-    // console.log(e);
     if (insertNumber <= 0) {
       return;
     }
@@ -44,23 +43,24 @@ export const Desafio03 = () => {
     solution,
     timeOut
   ) {
-    if (slot < 1 || (new Date() - timeOut) > 10 * 1000) {
+    if (slot < 1) {
       return;
     }
-    // if(solution === undefined){solution = [];}
+    let timeDiff = new Date() - timeOut;
+    if(timeDiff > (5 * 1000)){
+      return
+    }
 
     let slotValue;
     for (let n = 0; n < numberPossibilities; n++) {
       slotValue = array[n];
-      // console.log(solution, slotValue);
       solution.push(slotValue);
 
-      recursiveCall(slot - 1, numberPossibilities, array, objective, solution);
+      recursiveCall(slot - 1, numberPossibilities, array, objective, solution, timeOut);
 
       let total = 0;
       solution.forEach((elem) => (total = total + elem));
       if (total === objective) {
-        // console.log(total, solution);
         solucao.push([...solution]);
       }
       solution.pop();
@@ -70,7 +70,7 @@ export const Desafio03 = () => {
   function calculateSolution(array, numberValue) {
     let newArray =
       array === undefined ? [...numberArray].reverse() : [...array].reverse();
-    let amount = numberValue === undefined ? number : Number(numberValue);
+    let amount = numberValue === undefined ? Number(number) : Number(numberValue);
 
     if ((newArray.length === 1 && newArray[0] === 1) || newArray.length === 0) {
       return;
@@ -88,22 +88,20 @@ export const Desafio03 = () => {
     let totalPossibilities = numberPossibilities ** slotGuess;
     if (totalPossibilities > 10 ** 7) {
       calculateEasySolution();
-      solutionArray.forEach(elem=>{
-        if(elem.length > 30){setDisplayDownload(true)}else{setDisplayDownload(false)}
-      })
       return;
     }
     let timeOut = new Date()
     while (slot <= slot + 5) {
       recursiveCall(slot, numberPossibilities, newArray, amount, solution, timeOut);
       slot += 1;
-      if (solucao.length > 0) {
-        break;
+      if (solucao.length > 0 || ((new Date() - timeOut) > (5 * 1000))) {
+        calculateEasySolution()
+        return
       }
     }
     solucao.forEach((elem) => {
       elem.sort();
-      if(elem.length > 30){setDisplayDownload(true)}else{setDisplayDownload(false)}
+      if (elem.length > 30) { setDisplayDownload(true) } else { setDisplayDownload(false) }
     });
     solucao = uniq(solucao);
     setSolutionArray(solucao);
@@ -113,7 +111,7 @@ export const Desafio03 = () => {
 
   function calculateEasySolution() {
     let newArray = [...numberArray].reverse();
-    let amount = number;
+    let amount = Number(number);
     let solution = [];
     newArray.forEach((elem) => {
       if (elem === 0) {
@@ -134,23 +132,24 @@ export const Desafio03 = () => {
         "Problema complexo. Utilizado algoritmo otimizado de solução única",
         solution,
       ]);
-      return;
     } else {
       solution.push(`Problema sem solução - restou ${amount}`);
       setSolutionArray([solution]);
     }
+    if (solution.length > 30) { setDisplayDownload(true) } else { setDisplayDownload(false) }
+    return
   }
 
   function downloadFile(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
-  
+
     element.style.display = 'none';
     document.body.appendChild(element);
-  
+
     element.click();
-  
+
     document.body.removeChild(element);
   }
 
@@ -170,62 +169,69 @@ export const Desafio03 = () => {
         <p>Lista atual:</p>
         <p>{numberArray.toString()}</p>
       </div>
-      <label>Número desejado</label>
-      <input
-        value={number}
-        type="number"
-        min="1"
-        onChange={(e) => {
-          setNumber(Number(e.target.value));
-          // calculateSolution(undefined, e.target.value);
-        }}
-      />
-      <label>Insira um número na lista</label>
-      <input
-        value={insertNumber}
-        type="number"
-        min="1"
-        onChange={(e) => {
-          setInsertNumber(Number(e.target.value));
-        }}
-        onKeyDown={handleSetNumber}
-      />
-      <div className="buttons">
-        <button
-          onClick={() => {
-            calculateSolution();
-          }}
-        >
-          Calcular solução
-        </button>
-        <button
-          onClick={() => {
-            setNumberArray([1]);
-            setSolutionArray([]);
-            setDisplayDownload(false);
-          }}
-        >
-          Limpar lista
-        </button>
+      <div className="menu">
+        <div className="inputs">
+          <label>Número desejado</label>
+          <input
+            value={number}
+            type="number"
+            min="1"
+            onChange={(e) => {
+              setNumber(e.target.value);
+            }}
+          />
+
+          <label>Insira um número na lista</label>
+          <input
+            value={insertNumber}
+            type="number"
+            min="1"
+            onChange={(e) => {
+              setInsertNumber(e.target.value);
+            }}
+            onKeyDown={handleSetNumber}
+          />
+        </div>
+        <div className="buttons">
+          <button
+            onClick={() => {
+              calculateSolution();
+            }}
+          >
+            Calcular solução
+          </button>
+          <button
+            onClick={() => {
+              setNumberArray([]);
+              setSolutionArray([]);
+              setDisplayDownload(false);
+            }}
+          >
+            Limpar lista
+          </button>
+        </div>
       </div>
-      <div className="solution">
-        <p>Solução:</p>
-        {solutionArray.map((elem, index) => (
-          <p key={index}>
-            {/* {elem.map((value)=>(
+      {numberArray.length > 0 && number ?
+        <div className="solution">
+          <p>Solução:</p>
+          {solutionArray.map((elem, index) => (
+            <p key={index}>
+              {/* {elem.map((value)=>(
               ` ${value} `
             ))} */}
-            {JSON.stringify(elem)}
-           
-          </p>
-        ))}
-        {displayDownload ? 
-        <button onClick={()=>{downloadFile("arquivo.txt",JSON.stringify(solutionArray))}}>
-            Clique aqui para baixar a lista completa
-          </button>
+              {JSON.stringify(elem)}
+
+            </p>
+          ))}
+          {displayDownload ?
+            <button className="downloadButton" onClick={() => { downloadFile("arquivo.txt", JSON.stringify(solutionArray)) }}>
+              Clique aqui para baixar a lista completa
+            </button>
+            : ""
+          }
+        </div>
         : ""
-        }
-      </div>
+      }
     </Desafio03Container>
   );
 };
