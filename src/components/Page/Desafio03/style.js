@@ -52,8 +52,9 @@ export const Desafio03Container = styled.div`
 
   .solution {
     border: 1px solid #8257e6;
+    width: 80vw;
     border-radius: 3px;
-    margin: 50px 0;
+    margin: 50px auto;
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -61,6 +62,8 @@ export const Desafio03Container = styled.div`
 
     p {
       margin: 2rem auto;
+      max-width: 80vw;
+      overflow: hidden;
     }
   }
   

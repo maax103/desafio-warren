@@ -14,7 +14,7 @@ function App() {
 
   return (
   <>
-    <Header handleChange={handleChange} />
+    <Header desafio={desafio} handleChange={handleChange} />
     <Page desafio={desafio}/>
     <Footer />
   </>

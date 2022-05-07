@@ -1,10 +1,10 @@
 import React from 'react'
 import { ButtonContainer } from './style'
 
-export const Button = ({onClickFunction, children}) => {
+export const Button = ({id, desafio, onClickFunction, children}) => {
   return (
     <ButtonContainer> 
-        <button onClick={onClickFunction}>{children}</button>
+        <button className={desafio === id ? "active" : ""} onClick={onClickFunction}>{children}</button>
     </ButtonContainer>
   )
 }
