@@ -1,8 +1,6 @@
 {
-  "name": "snake-react-js",
+  "name": "desafio-warren",
   "version": "0.1.0",
-  "homepage": "https://github.com/maax103/desafio-warren",
-  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
