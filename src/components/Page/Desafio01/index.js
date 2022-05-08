@@ -71,7 +71,7 @@ export const Desafio01 = () => {
         
         <>
           <p>Tabela muito grande...</p>
-          <button onClick={()=>{downloadFile("Tabela",JSON.stringify(solution))}}>
+          <button onClick={()=>{downloadFile("tabela.txt",JSON.stringify(solution))}}>
             Clique aqui para baixar a tabela
           </button>
         </>:

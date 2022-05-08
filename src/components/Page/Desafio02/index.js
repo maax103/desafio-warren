@@ -35,8 +35,8 @@ export const Desafio02 = () => {
     let laterCount = 0;
     let counterZeros = 0;
     students.forEach((elem) => {
-      if (elem.time > classTime) {laterCount = laterCount + 1}
-      if (elem.time == 0){counterZeros = counterZeros + 1}
+      if (elem.time > classTime) {laterCount += 1}
+      if (elem.time == 0){counterZeros += 1}
     });
     return students.length - laterCount - counterZeros >= maxTolerance ? (
       <h3 className="normal">Aula normal com {students.length - laterCount} aluno(s) </h3>
