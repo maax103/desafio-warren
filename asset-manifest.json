@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/maax103/desafio-warren/static/css/main.8c76cf6c.css",
+    "main.js": "/maax103/desafio-warren/static/js/main.5763d3e3.js",
+    "index.html": "/maax103/desafio-warren/index.html",
+    "main.8c76cf6c.css.map": "/maax103/desafio-warren/static/css/main.8c76cf6c.css.map",
+    "main.5763d3e3.js.map": "/maax103/desafio-warren/static/js/main.5763d3e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c76cf6c.css",
+    "static/js/main.5763d3e3.js"
+  ]
+}
