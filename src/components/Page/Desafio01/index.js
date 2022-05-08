@@ -4,7 +4,6 @@ import { Desafio01Container } from './style'
 export const Desafio01 = () => {
 
   const [capValue, setCapValue] = useState(1000000)
-  // const [capV]
   const [solution, setSolution] = useState([]);
 
   function flipNumberAndSum(n) {
@@ -31,7 +30,6 @@ export const Desafio01 = () => {
     }
 
     setSolution(newArray);
-    console.log(newArray);
   }
 
   function downloadFile(filename, text) {

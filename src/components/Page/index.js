@@ -2,6 +2,7 @@ import React from 'react'
 import { Desafio01 } from './Desafio01';
 import { Desafio02 } from './Desafio02';
 import { Desafio03 } from './Desafio03';
+import { Intro } from './Intro';
 import { PageContainer } from './style';
 
 export const Page = ({desafio}) => {
@@ -20,7 +21,7 @@ export const Page = ({desafio}) => {
         desafio === 3 ?
         <Desafio03 />
         :
-        "Selecione um desafio"
+        <Intro />
         }
       </PageContainer>
   )

@@ -70,10 +70,9 @@ export const Desafio03Container = styled.div`
       transition: color 0.1s, background-color 0.1s;
       &:first-child{
         color: #e1e1e6;
-        &:hover {
-        filter: brightness(1.0);
-        color: #e1e1e6;
         background-color: #8257e6;
+        &:hover {
+        background-color: #8257e6EE
         }
       }
       &:last-child{

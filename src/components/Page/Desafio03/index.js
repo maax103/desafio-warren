@@ -8,7 +8,7 @@ export const Desafio03 = () => {
   const [solutionArray, setSolutionArray] = useState([]);
   const [displayDownload, setDisplayDownload] = useState(false);
 
-  var solucao = [];
+  var list = [];
 
   const filterDistinct = (value, index, self) => {
     return self.indexOf(value) === index;
@@ -32,6 +32,7 @@ export const Desafio03 = () => {
         newArray.sort((a, b) => a - b);
         return newArray;
       });
+      setInsertNumber("");
     }
   }
 
@@ -47,7 +48,7 @@ export const Desafio03 = () => {
       return;
     }
     let timeDiff = new Date() - timeOut;
-    if(timeDiff > (5 * 1000)){
+    if (timeDiff > (5 * 1000)) {
       return
     }
 
@@ -61,7 +62,7 @@ export const Desafio03 = () => {
       let total = 0;
       solution.forEach((elem) => (total = total + elem));
       if (total === objective) {
-        solucao.push([...solution]);
+        list.push([...solution]);
       }
       solution.pop();
     }
@@ -75,18 +76,18 @@ export const Desafio03 = () => {
     if ((newArray.length === 1 && newArray[0] === 1) || newArray.length === 0) {
       return;
     }
+    let minNumber = newArray.reduce(function (a, b) { return Math.min(a, b) });
+    if (Math.floor(amount / minNumber) === 0) { return }
 
     let numberPossibilities = newArray.length;
     let solution = [];
 
-    let maxNumber = newArray.reduce(function (a, b) {
-      return Math.max(a, b);
-    });
-
+    let maxNumber = newArray.reduce(function (a, b) { return Math.max(a, b); });
     let slotGuess = Math.floor(amount / maxNumber);
+
     let slot = slotGuess;
-    let totalPossibilities = numberPossibilities ** slotGuess;
-    if (totalPossibilities > 10 ** 7) {
+    let minPossibilities = numberPossibilities ** slotGuess;
+    if (minPossibilities > 10 ** 7) {
       calculateEasySolution();
       return;
     }
@@ -94,19 +95,20 @@ export const Desafio03 = () => {
     while (slot <= slot + 5) {
       recursiveCall(slot, numberPossibilities, newArray, amount, solution, timeOut);
       slot += 1;
-      if (solucao.length > 0 || ((new Date() - timeOut) > (5 * 1000))) {
+      if (list.length > 0) {
+        break
+      }
+      if ((new Date() - timeOut) > (5 * 1000)) {
         calculateEasySolution()
         return
       }
     }
-    solucao.forEach((elem) => {
+    list.forEach((elem) => {
       elem.sort();
       if (elem.length > 30) { setDisplayDownload(true) } else { setDisplayDownload(false) }
     });
-    solucao = uniq(solucao);
-    setSolutionArray(solucao);
-
-    // for(let i = 1; )
+    list = uniq(list);
+    setSolutionArray(list);
   }
 
   function calculateEasySolution() {
@@ -180,7 +182,6 @@ export const Desafio03 = () => {
               setNumber(e.target.value);
             }}
           />
-
           <label>Insira um número na lista</label>
           <input
             value={insertNumber}
@@ -196,8 +197,7 @@ export const Desafio03 = () => {
           <button
             onClick={() => {
               calculateSolution();
-            }}
-          >
+            }}>
             Calcular solução
           </button>
           <button
@@ -205,24 +205,26 @@ export const Desafio03 = () => {
               setNumberArray([]);
               setSolutionArray([]);
               setDisplayDownload(false);
-            }}
-          >
+            }}>
             Limpar lista
           </button>
         </div>
       </div>
       {numberArray.length > 0 && number ?
         <div className="solution">
-          <p>Solução:</p>
-          {solutionArray.map((elem, index) => (
-            <p key={index}>
-              {/* {elem.map((value)=>(
-              ` ${value} `
-            ))} */}
-              {JSON.stringify(elem)}
-
-            </p>
-          ))}
+          {solutionArray.length === 0 ?
+            <p>Clique em calcular</p>
+            :
+            <>
+              <p>Total de soluções: {solutionArray.length}</p>
+              <p>Solução:</p>
+              {solutionArray.map((elem, index) => (
+                <p key={index}>
+                  {JSON.stringify(elem)}
+                </p>
+              ))}
+            </>
+          }
           {displayDownload ?
             <button className="downloadButton" onClick={() => { downloadFile("arquivo.txt", JSON.stringify(solutionArray)) }}>
               Clique aqui para baixar a lista completa
