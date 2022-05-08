@@ -6,7 +6,7 @@ Este repositório foi criado como resolução ao Desafio Warren do programa de f
 
 Este projeto é uma aplicação web desenvolvida com javascript, utilizando a biblioteca de renderização React JS e styled-components.
 
-O detalhamento dos desafios está na sessão final desta documentação
+O detalhamento dos desafios está na sessão final desta documentação.
 
 ## Instruções de uso
 
