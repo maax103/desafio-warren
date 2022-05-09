@@ -57,15 +57,15 @@ Este problema pode se tornar complexo pois para calcular todas as soluções pos
   
 Devido as isto, se o usuário informar N = 1000 e V = [1, 2, 3], o sistema deve retornar [333 elementos 3, 1]. Portanto a solução é um vetor com 334 elementos. No ponto de vista do algoritmo, isso equivale a testar todos os outros vetores menores que 334 elementos.
   
-Ao analisar apenas o vetor com 3 elemntos, o algoritmo iria testar (3 possibilidades * 3 possibilidades * 3 possibilidades) = 3^3 = 9 possibilidades
+Ao analisar apenas o vetor com 3 elementos, o algoritmo iria testar (3 possibilidades * 3 possibilidades * 3 possibilidades) = 3^3 = 9 possibilidades
   
 Já ao analisar apenas o vetor com 333 elementos, será testado 3^333 combinações. Isto equivale a aproximadamente 7,6 * 10^158 arranjos possíveis.
 
-Para efetuar essas verificações, foi necessário criar uma função recursiva que testa todos os arranjos possíveis de um vetor, este algoritmo se comporta  de forma similar a algoritmos que quebra de senha por força bruta.
+Para efetuar essas verificações, foi necessário criar uma função recursiva que testa todos os arranjos possíveis de um vetor, este algoritmo se comporta  de forma similar a algoritmos que quebra de senha por força bruta. É claro que para reduzir a quantidade de tentativas o sistema irá usar o maior número do vetor e realizar uma divisão inteira em N. O resultado será o chute inicial para iniciar o teste dos arranjos.
+  
+Porém efetuar todas as validações possíveis, ainda assim, implica em um esforço computacional muito grande. Devido a isso ao verificar que serão necessárias mais de 10^7 arranjos, o sistema aplica um algoritmo diferente. Está caso também se aplica caso a operação ultrapasse o tempo limite de 5 segundos.
   
 De forma similar ao desafio 01, o sistema não irá renderizar a solução em tela caso ela for muito grande e irá habilitar um botão para download de um .txt.
-  
-Porém efetuar todas as validações possíveis implica em um esforço computacional muito grande. Devido a isso ao verificar que serão necessárias mais de 10^7 arranjos, o sistema aplica um algoritmo diferente. Está caso também se aplica caso a operação ultrapasse o tempo limite de 5 segundos.
   
 #### Algoritmo de solução otimizada
   
@@ -79,6 +79,6 @@ Porém efetuar todas as validações possíveis implica em um esforço computaci
   
   Foi divertido concluir cada um dos desafios, acredito que o resultado final serviu para todos os fins propostos.
   
-  O código final pode ser refatorado, simplificado, melhor definido a funções dos componentes e criado mais componentes genéricos.
+  O código final pode ser refatorado, simplificado, melhor definido a funções dos componentes e criado mais componentes genéricos. A página não está otimizada para telas pequenas
   
   Agradeço por toda a experiência proporcionada pela Warren e Proway. 
