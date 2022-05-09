@@ -44,7 +44,7 @@ Se deseja efetuar o download e executar em máquina local, será necessário as 
   
   Este desafio foi o mais difícil, foram criadas duas soluções que são utilizadas em momentos distintos.
   
-  O problema consiste em informar uma lista de números V e um número N. O sistema deve então retornar todas as combinações possíveis de V, tal que a soma dos de números desta combinação deve ser o mais próximo possível de N e possua a menor quantidade de elementos possíveis.
+  O problema consiste em informar uma lista de números V e um número N. O sistema deve então retornar todas as combinações possíveis de V, tal que a soma dos números desta combinação deve ser o mais próximo possível de N e possua a menor quantidade de elementos possíveis.
   
   Exemplo:
   
